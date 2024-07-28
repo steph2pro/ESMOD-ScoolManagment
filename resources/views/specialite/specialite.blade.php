@@ -27,25 +27,30 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>nom</th>
-                                <th>filiere</th>
+                                <th>libele</th>
+                                <th>Frais de scolarite</th>
+                                <th>Frais d'inscription</th>
                                 <th>ACTIONS</th>
                             </tr>
                         </thead>
                         <tbody>
-
+                            @foreach($specialites as $index => $specialite)
                             <tr class="element">
-                                <td class="data"></td>
-                                <td class="data"></td>
-                                <td class="data"></td>
-                                <td class="data"></td>
-
-
+                                <td class="data">{{ $index + 1 }}</td>
+                                <td class="data">{{ $specialite->libele }}</td>
+                                <td class="data">{{ $specialite->frais_scolarite }}</td>
+                                <td class="data">{{ $specialite->frais_inscription }}</td>
                                 <td class="data">
-                                    <a href="" class="btn btn-info btn-xs m-r-15"><i class="fa fa-pencil"></i></a>
-                                    <a href="" class="btn btn-danger btn-xs"><i class="fa fa-times"></i></a>
+                                    <a href="{{ route('specialite.edit', $specialite->id) }}" class="btn btn-info btn-xs m-r-15"><ion-icon style="margin-right: 0px;" name="create"></ion-icon></a>
+                                    <form action="{{ route('specialite.destroy', $specialite->id) }}" method="POST" style="display:inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-xs" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce specialite ?');"><i class="fa fa-times"></i></button>
+                                    </form>
                                 </td>
+
                             </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>

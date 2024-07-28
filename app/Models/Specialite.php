@@ -11,13 +11,12 @@ class Specialite extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nom',
+        'libele',
+        'frais_scolarite',
+        'frais_inscription',
     ];
 
-    public function scolarite()
-    {
-        return $this->belongsTo(Scolarite::class);
-    }
+
 
     public function etudiant()
     {

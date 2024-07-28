@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CampusController;
+use App\Http\Controllers\SpecialiteController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,13 +32,18 @@ Route::get('/users', function () {
     return view('users');
 })->name('users');
 
-Route::get('/specialite', function () {
-    return view('specialite.specialite');
-})->name('specialite');
+Route::get('/specialite', [SpecialiteController::class, 'index'])->name('specialite');
 Route::get('/specialiteAdd', function () {
     return view('specialite.specialiteAdd');
 })->name('specialiteAdd');
+//route pour traiter le formulaire
+Route::post('/specialiteAd', [SpecialiteController::class, 'store'])->name('specialite.store');
 
+Route::get('/specialite/{id}/edit', [SpecialiteController::class, 'edit'])->name('specialite.edit');
+Route::put('/specialite/{id}', [SpecialiteController::class, 'update'])->name('specialite.update');
+Route::delete('/specialite/{id}', [SpecialiteController::class, 'destroy'])->name('specialite.destroy');
+
+//campus
 Route::get('/campus', [CampusController::class, 'index'])->name('campus');
 //route pour afficher le formulaire
 Route::get('/campusAdd', function () {

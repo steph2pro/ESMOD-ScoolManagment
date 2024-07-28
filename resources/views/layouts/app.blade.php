@@ -110,37 +110,38 @@
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu">
                     {{-- @include("menu") --}}
-                    <li class="">
+                    <li class="{{ request()->routeIs('dashboard') ? 'active' : '' }}">
                         <a href="{{ route('dashboard') }}">
                             <ion-icon name="logo-microsoft"></ion-icon> <span>Dashboard</span>
                         </a>
                     </li>
-                    <li class="">
+                    <li class="{{ request()->routeIs('students') ? 'active' : '' }}">
                         <a href="{{ route('students') }}">
                             <ion-icon name="school"></ion-icon> <span>Etudiants</span>
                         </a>
                     </li>
-                    <li class="">
+                    <li class="{{ request()->routeIs('users') ? 'active' : '' }}">
                         <a href="{{ route('users') }}">
                             <ion-icon name="people"></ion-icon> <span>Utilisateurs</span>
                         </a>
                     </li>
-                    <li class="">
+                    <li class="{{ request()->routeIs('specialite','specialiteAdd','specialite.edit') ? 'active' : '' }}">
                         <a href="{{ route('specialite') }}">
                             <ion-icon name="sparkles"></ion-icon> <span>Specialités</span>
                         </a>
                     </li>
-                    <li class="">
+                    <li class="{{ request()->routeIs('campus','campusAdd','campus.edit') ? 'active' : '' }}">
                         <a href="{{ route('campus') }}">
                             <ion-icon name="school"></ion-icon> <span>Campus</span>
                         </a>
                     </li>
-                    <li class="">
+                    <li class="{{ request()->routeIs('synthesis') ? 'active' : '' }}">
                         <a href="{{ route('synthesis') }}">
                             <ion-icon name="logo-buffer"></ion-icon> <span>Synthèse</span>
                         </a>
                     </li>
                 </ul>
+
             </section>
             <!-- /.sidebar -->
         </aside>

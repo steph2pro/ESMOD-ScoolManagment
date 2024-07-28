@@ -1,3 +1,4 @@
+
 <?php
 
 use Illuminate\Database\Migrations\Migration;
@@ -11,13 +12,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
-
         Schema::create('specialites', function (Blueprint $table) {
             $table->id();
-            $table->string('nom');
+            $table->string('libele');
+            $table->decimal('frais_scolarite', 10, 2) ;
+            $table->decimal('frais_inscription', 10, 2) ;
             $table->timestamps();
-            $table->foreignId('scolarite_id')->constrained();
         });
     }
 
@@ -26,7 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
         Schema::dropIfExists('specialites');
     }
 };
