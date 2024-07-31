@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CampusController;
 use App\Http\Controllers\SpecialiteController;
+use App\Http\Controllers\UtilisateurController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,6 +43,18 @@ Route::post('/specialiteAd', [SpecialiteController::class, 'store'])->name('spec
 Route::get('/specialite/{id}/edit', [SpecialiteController::class, 'edit'])->name('specialite.edit');
 Route::put('/specialite/{id}', [SpecialiteController::class, 'update'])->name('specialite.update');
 Route::delete('/specialite/{id}', [SpecialiteController::class, 'destroy'])->name('specialite.destroy');
+
+//utilisateur
+Route::get('/utilisateur', [UtilisateurController::class, 'index'])->name('utilisateur');
+Route::get('/utilisateurAdd', function () {
+    return view('utilisateur.utilisateurAdd');
+})->name('utilisateurAdd');
+//route pour traiter le formulaire
+Route::post('/utilisateurAd', [UtilisateurController::class, 'store'])->name('utilisateur.store');
+
+Route::get('/utilisateur/{id}/edit', [UtilisateurController::class, 'edit'])->name('utilisateur.edit');
+Route::put('/utilisateur/{id}', [UtilisateurController::class, 'update'])->name('utilisateur.update');
+Route::delete('/utilisateur/{id}', [UtilisateurController::class, 'destroy'])->name('utilisateur.destroy');
 
 //campus
 Route::get('/campus', [CampusController::class, 'index'])->name('campus');
