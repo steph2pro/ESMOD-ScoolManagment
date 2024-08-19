@@ -21,9 +21,10 @@ return new class extends Migration
             $table->integer('mobile');
             $table->timestamps();
             $table->foreignId('utilisateur_id')->constrained();
-            $table->foreignId('campu_id')->constrained();
+            $table->foreignId('campus_id')->constrained();
             $table->foreignId('specialite_id')->constrained();
         });
+
     }
 
     /**

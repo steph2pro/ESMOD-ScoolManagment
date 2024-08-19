@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CampusController;
+use App\Http\Controllers\EtudiantController;
 use App\Http\Controllers\SpecialiteController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,15 +20,37 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('home');
 // });
+//route de connexion
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [LoginController::class, 'login']);
+// deconnection
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 // routes/web.php
-Route::get('/', function () {
-    return view('home');
-})->name('dashboard');
+// Route::get('/', function () {
+//     return view('home');
+// })->name('dashboard');
 
-Route::get('/students', function () {
-    return view('students');
-})->name('students');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware('auth');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/', function () {
+        return view('dashboard');
+    });
+});
+
+
+
+Route::get('/etudiant',[EtudiantController::class, 'index'])->name('etudiant');
+Route::get('/etudiantAdd',[EtudiantController::class, 'create'])->name('etudiant.create');
+Route::post('/etudiantAd', [EtudiantController::class, 'store'])->name('etudiant.store');
+
+Route::get('/etudiant/{id}/edit', [EtudiantController::class, 'edit'])->name('etudiant.edit');
+Route::put('/etudiant/{id}', [EtudiantController::class, 'update'])->name('etudiant.update');
+Route::delete('/etudiant/{id}', [EtudiantController::class, 'destroy'])->name('etudiant.destroy');
+
 
 Route::get('/users', function () {
     return view('users');

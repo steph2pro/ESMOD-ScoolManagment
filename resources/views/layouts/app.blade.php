@@ -115,8 +115,8 @@
                             <ion-icon name="logo-microsoft"></ion-icon> <span>Dashboard</span>
                         </a>
                     </li>
-                    <li class="{{ request()->routeIs('students') ? 'active' : '' }}">
-                        <a href="{{ route('students') }}">
+                    <li class="{{ request()->routeIs('etudiant') ? 'active' : '' }}">
+                        <a href="{{ route('etudiant') }}">
                             <ion-icon name="school"></ion-icon> <span>Etudiants</span>
                         </a>
                     </li>

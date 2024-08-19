@@ -8,6 +8,7 @@ use App\Models\Utilisateur;
 use App\Models\Campus;
 use App\Models\Specialite;
 use App\Models\Paiement_frais;
+use App\Models\Scolarite;
 
 class Etudiant extends Model
 {
@@ -19,8 +20,11 @@ class Etudiant extends Model
         'sexe',
         'email',
         'mobile',
+        'utilisateur_id',
+        'campus_id',
+        'specialite_id',
+        'scolarite_id'
     ];
-
 
     public function utilisateur()
     {
@@ -42,4 +46,17 @@ class Etudiant extends Model
         return $this->hasMany(Paiement_frais::class);
     }
 
+    public function scolarite()
+    {
+        return $this->belongsTo(Scolarite::class);
+    }
+    // protected static function boot()
+    // {
+    //     parent::boot();
+
+    //     static::deleting(function ($etudiant) {
+    //         // Supprimer la scolarité associée
+    //         $etudiant->scolarite()->delete();
+    //     });
+    // }
 }

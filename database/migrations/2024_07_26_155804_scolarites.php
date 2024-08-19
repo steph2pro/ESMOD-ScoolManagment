@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('montant_total');
             $table->integer('montant_paye');
             $table->integer('montant_restant');
-            $table->integer('frais_inscription');
+            $table->integer('montant_inscription');
             $table->timestamps();
         });
     }

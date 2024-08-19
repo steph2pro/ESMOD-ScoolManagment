@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Specialite;
+use App\Models\Etudiant;
 
 class Scolarite extends Model
 {
@@ -15,11 +15,11 @@ class Scolarite extends Model
         'montant_total',
         'montant_paye',
         'montant_restant',
-        'frais_inscription',
+        'montant_inscription',
     ];
 
-    public function specialite()
+    public function etudiants()
     {
-        return $this->hasMany(Specialite::class);
+        return $this->hasMany(Etudiant::class);
     }
 }
