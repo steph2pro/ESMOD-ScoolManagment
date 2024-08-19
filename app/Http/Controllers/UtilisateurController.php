@@ -14,21 +14,22 @@ class UtilisateurController extends Controller
         // Valider les données du formulaire
         $validatedData = $request->validate([
             'nom' => 'required|string|max:255',
-            'prenom' => 'required|string|max:255',
+            'email' => 'required|string|max:255',
+            'role' => 'required|string|max:255',
             'sexe' => 'required|string|max:255',
             'password' => 'required|min:8',
         ]);
-        
+
         // Chiffrer le mot de passe
         $validatedData['password'] = Hash::make($validatedData['password']);
-        
+//dd($validatedData);
         // Créer un nouveau utilisateur
         Utilisateur::create($validatedData);
 
         // Rediriger avec un message de succès
         return redirect()->route('utilisateur')->with('success', 'utilisateur ajouté avec succès');
     }
-    
+
     public function index()
     {
         // Récupérer tous les utilisateur
@@ -37,7 +38,7 @@ class UtilisateurController extends Controller
         // Passer les données à la vue
         return view('utilisateur.utilisateur', compact('utilisateurs'));
     }
-    
+
     // Afficher le formulaire d'édition
     public function edit($id)
     {
@@ -51,20 +52,22 @@ class UtilisateurController extends Controller
         // Valider les données du formulaire
         $validatedData = $request->validate([
             'nom' => 'required|string|max:255',
-            'prenom' => 'required|string|max:255',
+            'email' => 'required|string|max:255',
+            'role' => 'required|string|max:255',
             'sexe' => 'required|string|max:255',
             'password' => 'required|min:8',
         ]);
 
         // Trouver la spécialité par ID et mettre à jour
         $utilisateur = Utilisateur::findOrFail($id);
-        
+
         // Chiffrer le mot de passe
         $validatedData['password'] = Hash::make($validatedData['password']);
-        
+
         $utilisateur->update([
             'nom' => $validatedData['nom'],
-            'prenom' => $validatedData['prenom'],
+            'email' => $validatedData['email'],
+            'role' => $validatedData['role'],
             'sexe' => $validatedData['sexe'],
             'password' => $validatedData['password'],
         ]);

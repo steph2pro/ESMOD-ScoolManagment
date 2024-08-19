@@ -33,7 +33,7 @@ class CampusController extends Controller
     public function edit($id)
     {
         $campus = Campus::findOrFail($id);
-        return view('campus.campusEdit', compact('campus')); 
+        return view('campus.campusEdit', compact('campus'));
     }
 
     public function update(Request $request, $id)
@@ -54,5 +54,14 @@ class CampusController extends Controller
         $campus->delete();
 
         return redirect()->route('campus')->with('success', 'Campus supprimé avec succès');
+    }
+
+    public function indexCE()
+    {
+        // Récupère les campus avec le nombre d'étudiants associés
+        $campuses = Campus::withCount('etudiants')->get(); // Notez que la relation est 'etudiants'
+
+        // Passe les données à la vue
+        return view('home', compact('campuses'));
     }
 }

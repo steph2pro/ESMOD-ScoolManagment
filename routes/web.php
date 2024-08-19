@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CampusController;
+use App\Http\Controllers\CampusEtudController;
 use App\Http\Controllers\EtudiantController;
 use App\Http\Controllers\SpecialiteController;
 use App\Http\Controllers\UtilisateurController;
@@ -26,6 +27,7 @@ Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 // deconnection
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::get('/logoutPage', [LoginController::class, 'showLogoutForm'])->name('logoutPage');
 
 // routes/web.php
 // Route::get('/', function () {
@@ -37,9 +39,8 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 // })->middleware('auth');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/', function () {
-        return view('dashboard');
-    });
+    Route::get('/', [CampusController::class,'indexCE'])->name('dashboard');
+    // Route::get('/campuses', [CampusController::class, 'index'])->name('campuses.index');
 });
 
 

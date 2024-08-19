@@ -18,27 +18,56 @@
                     <form action="{{ route('utilisateur.store') }}" method="POST">
                         @csrf
                         <div class="form-group">
-                            <label for="nom">Nom de l'utilisateur</label>
-                            <input type="text" class="form-control" name="nom" id="nom" placeholder="Entrer le nom de l'utilisateur" required>
+                            <label for="nom">Nom et prénom de l'utilisateur</label>
+                            <input type="text" class="form-control @error('nom') is-invalid @enderror" name="nom" id="nom" placeholder="Entrer le nom de l'utilisateur" value="{{ old('nom') }}" required>
+                            @error('nom')
+                                <span class="invalid-feedback  text-danger" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
 
                         <div class="form-group">
-                            <label for="prenom">Prenom de l'utilisateur</label>
-                            <input type="text" class="form-control" name="prenom" id="prenom" placeholder="Entrer le prenom de l'utilisateur" required>
+                            <label for="email">Email de l'utilisateur</label>
+                            <input type="text" class="form-control @error('email') is-invalid @enderror" name="email" id="email" placeholder="Entrer l'email de l'utilisateur" value="{{ old('email') }}" required>
+                            @error('email')
+                                <span class="invalid-feedback  text-danger" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
 
+                        <div class="form-group">
+                            <label for="role">Role de l'utilisateur</label>
+                            <input type="text" class="form-control @error('role') is-invalid @enderror" name="role" id="role" placeholder="Entrer le role de l'utilisateur" value="{{ old('role') }}" required>
+                            @error('email')
+                                <span class="invalid-feedback  text-danger" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
                         <div class="form-group">
                             <label for="sexe">Sexe</label>
-                            <select name="sexe" id="sexe" class="form-control" required>
-                                <option value="">Selectionnez votre sexe</option>
-                                <option value="feminin">Feminin</option>
-                                <option value="masculin">Masculin</option>
+                            <select name="sexe" id="sexe" class="form-control @error('sexe') is-invalid @enderror" required>
+                                <option value="">Sélectionnez votre sexe</option>
+                                <option value="feminin" {{ old('sexe') == 'feminin' ? 'selected' : '' }}>Féminin</option>
+                                <option value="masculin" {{ old('sexe') == 'masculin' ? 'selected' : '' }}>Masculin</option>
                             </select>
+                            @error('sexe')
+                                <span class="invalid-feedback text-danger" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
 
                         <div class="form-group">
                             <label for="password">Mot de passe</label>
-                            <input type="password" class="form-control" name="password" id="password" placeholder="Entrer le mot de passe de l'utilisateur" required>
+                            <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" id="password" placeholder="Entrer le mot de passe de l'utilisateur" required>
+                            @error('password')
+                                <span class="invalid-feedback text-danger" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
 
                         <button type="submit" class="btn btn-info">Enregistrer</button>

@@ -27,8 +27,9 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Nom</th>
-                                <th>Prenom</th>
+                                <th>Nom et prenom</th>
+                                <th>Role</th>
+                                <th>Email</th>
                                 <th>Sexe</th>
                                 <th>ACTIONS</th>
                             </tr>
@@ -38,7 +39,8 @@
                             <tr class="element">
                                 <td class="data">{{ $index + 1 }}</td>
                                 <td class="data">{{ $utilisateur->nom }}</td>
-                                <td class="data">{{ $utilisateur->prenom }}</td>
+                                <td class="data">{{ $utilisateur->role }}</td>
+                                <td class="data">{{ $utilisateur->email }}</td>
                                 <td class="data">{{ $utilisateur->sexe }}</td>
                                 <td class="data">
                                     <a href="{{ route('utilisateur.edit', $utilisateur->id) }}" class="btn btn-info btn-xs m-r-15"><ion-icon style="margin-right: 0px;" name="create"></ion-icon></a>

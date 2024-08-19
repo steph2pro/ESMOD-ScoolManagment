@@ -4,16 +4,18 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Utilisateur extends Model
+class Utilisateur extends Authenticatable
 {
     use HasFactory;
 
     protected $fillable = [
         'nom',
-        'prenom',
+        'email',
         'sexe',
         'password',
+        'role',  // Ajoute le champ role ici
     ];
 
     public function etudiant()

@@ -81,13 +81,13 @@
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="fa fa-user"></i>
-                            <span>Stephane<i class="caret"></i></span>
+                            <span>{{ session('user')->nom }}<i class="caret"></i></span>
                         </a>
                         <ul class="dropdown-menu dropdown-custom dropdown-menu-right">
                             <li class="dropdown-header text-center">Account</li>
                             <li class="divider"></li>
                             <li>
-                                <a href="{{ route('logout') }}"><i class="fa fa-ban fa-fw pull-right"></i> Logout</a>
+                                <a href="{{ route('logoutPage') }}"><i class="fa fa-ban fa-fw pull-right"></i> Deconexion</a>
                             </li>
                         </ul>
                     </li>
@@ -97,13 +97,13 @@
     </header>
     <div class="wrapper row-offcanvas row-offcanvas-left">
         <!-- Left side column. contains the logo and sidebar -->
-        <aside class="left-side sidebar-offcanvas" style="background: rgb(168, 2, 2);">
+        <aside class="left-side sidebar-offcanvas " style="background: #dc3545;">
             <!-- sidebar: style can be found in sidebar.less -->
             <section class="sidebar">
                 <!-- Sidebar user panel -->
                 <div class="user-panel">
                     <div class="pull-left info">
-                        <p>Salut, Stephane</p>
+                        <p>Salut, {{ session('user')->nom }}</p>
                         <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                     </div>
                 </div>

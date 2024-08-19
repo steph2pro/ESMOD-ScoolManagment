@@ -26,14 +26,14 @@ class Etudiant extends Model
         'scolarite_id'
     ];
 
-    public function utilisateur()
-    {
-        return $this->belongsTo(Utilisateur::class);
-    }
-
     public function campus()
     {
         return $this->belongsTo(Campus::class);
+    }
+
+    public function utilisateur()
+    {
+        return $this->belongsTo(Utilisateur::class);
     }
 
     public function specialite()
@@ -50,13 +50,5 @@ class Etudiant extends Model
     {
         return $this->belongsTo(Scolarite::class);
     }
-    // protected static function boot()
-    // {
-    //     parent::boot();
 
-    //     static::deleting(function ($etudiant) {
-    //         // Supprimer la scolarité associée
-    //         $etudiant->scolarite()->delete();
-    //     });
-    // }
 }

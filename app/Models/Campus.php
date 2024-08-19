@@ -16,9 +16,20 @@ class Campus extends Model
         'adresse'
     ];
 
-    public function etudiant()
+    public function etudiants()
     {
         return $this->hasMany(Etudiant::class);
+    }
+    /**
+     * Compte le nombre d'étudiants pour un campus donné par son ID.
+     *
+     * @param int $campusId
+     * @return int
+     */
+    public static function countEtudiantsByCampusId($campusId)
+    {
+        // On utilise la relation pour compter les étudiants du campus
+        return self::where('id', $campusId)->first()->etudiants()->count();
     }
 
 }
