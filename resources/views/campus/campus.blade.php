@@ -4,7 +4,7 @@
 
 
 <div class="content">
-    <a href="{{ route("campusAdd") }}" class="btn btn-primary btn-addon pull-right">
+    <a href="{{ route('campusAdd') }}" class="btn btn-primary btn-addon pull-right">
         <i class="fa fa-plus"></i>
         Ajouter un campus
     </a>

@@ -33,7 +33,7 @@ class CampusController extends Controller
     public function edit($id)
     {
         $campus = Campus::findOrFail($id);
-        return view('campus.campusEdit', compact('campus'));
+        return view('campus.campusEdit', compact('campus')); 
     }
 
     public function update(Request $request, $id)

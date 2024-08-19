@@ -120,8 +120,8 @@
                             <ion-icon name="school"></ion-icon> <span>Etudiants</span>
                         </a>
                     </li>
-                    <li class="{{ request()->routeIs('users') ? 'active' : '' }}">
-                        <a href="{{ route('users') }}">
+                    <li class="{{ request()->routeIs('utilisateur','utilisateurAdd','utilisateur.edit') ? 'active' : '' }}">
+                        <a href="{{ route('utilisateur') }}">
                             <ion-icon name="people"></ion-icon> <span>Utilisateurs</span>
                         </a>
                     </li>
