@@ -3,4 +3,6 @@
 
 @section('content')
     @include("Dashboard")
+    {{-- @include('etudiant.etatGlobal') --}}
+
 @endsection

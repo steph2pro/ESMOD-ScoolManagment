@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('sexe');
             $table->string('email');
             $table->integer('mobile');
+            $table->integer('mot_de_pass');
             $table->timestamps();
             $table->foreignId('utilisateur_id')->constrained();
             $table->foreignId('campus_id')->constrained();

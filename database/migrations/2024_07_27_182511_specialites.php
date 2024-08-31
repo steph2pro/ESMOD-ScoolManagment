@@ -15,6 +15,7 @@ return new class extends Migration
         Schema::create('specialites', function (Blueprint $table) {
             $table->id();
             $table->string('libele');
+            $table->string('abreviation');
             $table->decimal('frais_scolarite', 10, 2) ;
             $table->decimal('frais_inscription', 10, 2) ;
             $table->timestamps();

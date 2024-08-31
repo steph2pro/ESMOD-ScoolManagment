@@ -2,13 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Campus;
 use Illuminate\Support\Facades\Hash;
 
 use Illuminate\Http\Request;
 use App\Models\Utilisateur;
-
+use Illuminate\Support\Facades\Crypt;
 class UtilisateurController extends Controller
 {
+
+    public function create()
+    {
+
+        $campus = Campus::all();
+
+        return view('utilisateur.utilisateurAdd', compact( 'campus'));
+    }
+
+
     public function store(Request $request)
     {
         // Valider les données du formulaire
@@ -20,7 +31,10 @@ class UtilisateurController extends Controller
             'password' => 'required|min:8',
         ]);
 
-        // Chiffrer le mot de passe
+        // Chiffrer le mot de passeuse
+
+// $encryptedPassword = Crypt::encrypt($validatedData['password']);
+
         $validatedData['password'] = Hash::make($validatedData['password']);
 //dd($validatedData);
         // Créer un nouveau utilisateur
@@ -43,7 +57,9 @@ class UtilisateurController extends Controller
     public function edit($id)
     {
         $utilisateur = Utilisateur::findOrFail($id);
-        return view('utilisateur.utilisateurEdit', compact('utilisateur'));
+        $campus = Campus::all();
+
+        return view('utilisateur.utilisateurEdit', compact('utilisateur','campus'));
     }
 
     // Mettre à jour la spécialité dans la base de données
@@ -71,9 +87,19 @@ class UtilisateurController extends Controller
             'sexe' => $validatedData['sexe'],
             'password' => $validatedData['password'],
         ]);
+        if (session('user')->role != "Administrateur") {
+            // Rediriger avec un message de succès
+            return redirect()->route('utilisateur.show',session("user")->id)->with('success', 'information modifier avec succès');
+        } else {
+            // Rediriger avec un message de succès
+            return redirect()->route('utilisateur')->with('success', 'Utilisateur mise à jour avec succès');
+        }
+    }
 
-        // Rediriger avec un message de succès
-        return redirect()->route('utilisateur')->with('success', 'Spécialité mise à jour avec succès');
+    public function show($id)
+    {
+        $utilisateur = Utilisateur::findOrFail($id); // Récupère l'utilisateur par son ID
+        return view('utilisateur.profil', compact('utilisateur'));
     }
 
     public function destroy($id)

@@ -2,11 +2,10 @@
 
 @section('content')
 
-
 <div class="content">
-    <a href="{{ route('campusAdd') }}" class="btn btn-primary btn-addon pull-right">
+    <a href="{{ route('versement.create') }}" class="btn btn-primary btn-addon pull-right">
         <i class="fa fa-plus"></i>
-        Ajouter un campus
+        Ajouter un versement
     </a>
 
     <div class="row ">
@@ -14,7 +13,7 @@
             <section class="panel">
                 <header class="panel-heading">
                     <div>
-                        Liste des campus
+                        Liste des versements
                         <input type="search" name="search" id="search" placeholder="rechercher......" class="pull-right" style="padding: 10px;width: 30%;margin: 10px">
                     </div>
                 </header>
@@ -24,26 +23,31 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Nom</th>
-                                    <th>ville</th>
+                                    <th>Nom étudiant</th>
+                                    <th>Objet </th>
+                                    <th>Mode</th>
+                                    <th>Montant</th>
+                                    <th>Date</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($campuses as $index => $campus)
+                                @foreach($versements as $index => $versement)
                                     <tr class="element">
                                         <td class="data">{{ $index + 1 }}</td>
-                                        <td class="data">{{ $campus->nom }}</td>
-                                        <td class="data">{{ $campus->adresse }}</td>
+                                        <td class="data">{{ $versement->etudiant->nom_prenom ?? 'N/A' }}</td>
+                                        <td class="data">{{ $versement->objet_paiement ?? 'N/A' }}</td>
+                                        <td class="data">{{ $versement->mode_paiement ?? 'N/A' }}</td>
+                                        <td class="data">{{ $versement->montant ?? 'N/A' }}</td>
+                                        <td class="data">{{ $versement->date_paiement ?? 'N/A' }}</td>
                                         <td class="data">
-                                            <a href="{{ route('campus.edit', $campus->id) }}" class="btn btn-info btn-xs m-r-15"><ion-icon style="margin-right: 0px;" name="create"></ion-icon></a>
-                                            <form action="{{ route('campus.destroy', $campus->id) }}" method="POST" style="display:inline;">
+                                            <a href="{{ route('versement.edit', $versement->id) }}" class="btn btn-info btn-xs m-r-15"><ion-icon style="margin-right: 0px;" name="create"></ion-icon></a>
+                                            <form action="{{ route('versement.destroy', $versement->id) }}" method="POST" style="display:inline;">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-xs" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce campus ?');"><i class="fa fa-times"></i></button>
+                                                <button type="submit" class="btn btn-danger btn-xs" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce versement ?');"><i class="fa fa-times"></i></button>
                                             </form>
                                         </td>
-
                                     </tr>
                                 @endforeach
                             </tbody>

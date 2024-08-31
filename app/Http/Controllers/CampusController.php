@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Campus;
+use App\Models\Specialite;
 use Illuminate\Http\Request;
 
 class CampusController extends Controller
@@ -58,10 +59,36 @@ class CampusController extends Controller
 
     public function indexCE()
     {
-        // Récupère les campus avec le nombre d'étudiants associés
-        $campuses = Campus::withCount('etudiants')->get(); // Notez que la relation est 'etudiants'
 
-        // Passe les données à la vue
-        return view('home', compact('campuses'));
+        if (session('user')->role != "Administrateur") {
+            // Récupérer le campus de l'utilisateur connecté
+            $campusId = session('campus')->id;
+
+            // Récupérer les spécialités et compter uniquement les étudiants pour le campus spécifié
+            $specialites = Specialite::withCount(['etudiants' => function($query) use ($campusId) {
+                $query->where('campus_id', $campusId);
+            }])->get();
+
+
+            // Récupérer le campus de l'utilisateur connecté
+            $campusId = session('campus')->id;
+
+            // Récupérer les étudiants avec leur scolarité pour le campus spécifique
+            $campuses = Campus::with(['etudiants' => function($query) use ($campusId) {
+                $query->where('campus_id', $campusId)->with('scolarite');
+            }])->where('id', $campusId)->get();
+            // Retourner la vue avec les spécialités filtrées
+            return view('home', compact('specialites','campuses'));
+        } else {
+            // Récupère les campus avec le nombre d'étudiants associés
+            $campuses = Campus::withCount('etudiants')->get();
+
+            // Récupère les spécialités avec le nombre d'étudiants associés
+            $specialites = Specialite::withCount('etudiants')->get();
+
+            // Passe les données à la vue
+            return view('home', compact('campuses', 'specialites'));
+        }
     }
+
 }

@@ -24,8 +24,8 @@
 
 
             <div class="form-group">
-                <label for="exampleInputEmail1">Adresse </label>
-                <input type="text" class="form-control" name="adresse" placeholder="pays, ville,quatier" require>
+                <label for="exampleInputEmail1">Adresse  ou ville</label>
+                <input type="text" class="form-control" name="adresse" placeholder="ville,quatier" require>
             </div>
 
 

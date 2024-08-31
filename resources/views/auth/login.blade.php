@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>ESMOD Connexion</title>
-    <link rel="icon" type="image/png" sizes="126x126" href="{{ asset('imgs/logo.png') }}">
+    <link rel="icon" type="image/png" sizes="126x126" href="{{ asset('img/logo.jpg') }}">
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
     <!-- Nucleo Icons -->
@@ -23,7 +23,7 @@
 
 <body class="">
     <div class="position-absolute z-index-sticky p-4 d-flex">
-        <img src="{{ asset('imgs/logo.png') }}" alt="logo" class="w-5">
+        <img src="{{ asset('img/logo.jpg') }}" alt="logo" class="w-5">
         <h3>ESMOD SchoolManagement</h3>
     </div>
     <!-- <div class="container position-sticky z-index-sticky top-0">
@@ -47,11 +47,11 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="container mt-15">
-                                        <h2>
+                                        <h2 class="text-center">
                                             Connexion
                                         </h2>
                                         @if (session('error'))
-                                            <div class="alert alert-danger">
+                                            <div class="alert alert-warning text-center"  style="background: #dc3545;color:white">
                                                 {{ session('error') }}
                                             </div>
                                         @endif
@@ -73,7 +73,7 @@
                                             </div>
                                             <div class="text-center">
                                                 <button type="submit" name="login"
-                                                    class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0">connexion</button>
+                                                    class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0">se connecter</button>
                                             </div>
                                         </form>
                                     </div>
@@ -90,11 +90,10 @@
                             </div>
                         </div>
                         <div
-                            class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 end-0 text-center justify-content-center flex-column">
-                            <div class="position-relative bg-gradient-primary h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center overflow-hidden"
-                                style="background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-assets/img/signin-ill.jpg');
-          background-size: cover;">
-                                <span class="mask bg-gradient-primary opacity-6"></span>
+                            class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 end-0 text-center justify-content-center flex-column" >
+                            <div class="position-relative  h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center overflow-hidden"  style="background: #dc3545;"
+                                >
+                                {{-- <span class="mask bg-gradient-primary opacity-6"></span> --}}
                                 <h4 class="mt-5 text-white font-weight-bolder position-relative">"Connectez vous à la
                                     meilleure application web de gestion scolaire"</h4>
                                 <p class="text-white position-relative">Avec ESMOD SchoolManagement vos gestions sont mieux en

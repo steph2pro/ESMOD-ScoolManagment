@@ -39,11 +39,20 @@
 
                         <div class="form-group">
                             <label for="role">Role de l'utilisateur</label>
-                            <input type="text" class="form-control @error('role') is-invalid @enderror" name="role" id="role" placeholder="Entrer le role de l'utilisateur" value="{{ old('role') }}" required>
-                            @error('email')
-                                <span class="invalid-feedback  text-danger" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="role"> choisir le Campus qu'il devra administrer</label>
+                            <select name="role" id="role" class="form-control @error('role') is-invalid @enderror" required>
+                                <option value="Administrateur">Tous les Campus</option>
+                                @foreach($campus as $camp)
+                                    <option value="Gerant, {{ $camp->nom}}" {{ old('role') == $camp->nom ? 'selected' : '' }}>{{ $camp->nom }}</option>
+                                @endforeach
+                            </select>
+                            @error('role')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
                             @enderror
                         </div>
                         <div class="form-group">

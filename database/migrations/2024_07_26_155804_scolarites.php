@@ -15,7 +15,7 @@ return new class extends Migration
 
         Schema::create('scolarites', function (Blueprint $table) {
             $table->id();
-            $table->integer('annee_scolaire');
+            $table->string('annee_scolaire');
             $table->integer('montant_total');
             $table->integer('montant_paye');
             $table->integer('montant_restant');

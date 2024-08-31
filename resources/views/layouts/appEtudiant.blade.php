@@ -56,110 +56,31 @@
             font-size: 17px;
             margin-right: 10px;
         }
-        .header-background {
-            background-image: url('{{ asset('img/esmodRecu.JPG') }}'); /* Remplacez par le chemin de votre image */
-            background-size: cover; /* Ajuste l'image pour couvrir l'élément */
-            background-position: center; /* Centre l'image */
-            color: white; /* Change la couleur du texte si nécessaire */
-            height: 100px; /* Ajustez la hauteur selon vos besoins */
-        }
-        .header-background2{
-    background-image: url('{{ asset('img/esmodLogo.JPG') }}'); /* Remplacez par le chemin de votre image */
-    background-size:60%;  /*Ajuste l'image pour couvrir l'élément */
-    background-position: center; /* Centre l'image */
-    background-repeat:no-repeat;
-
-    /*color: white;  Change la couleur du texte si nécessaire */
-    height: 100px; /* Ajustez la hauteur selon vos besoins */
-}
-.tableau-violet {
-    border-collapse: collapse; /* Pour fusionner les bordures */
-    width: 100%; /* Ajustez selon vos besoins */
-}
-
-.tableau-violet th, .tableau-violet td {
-    border: 1px solid dodgerblue; /* Bordure de 2 pixels en violet */
-    padding: 8px; /* Espacement interne */
-    text-align: left; /* Alignement du texte */
-}
-
-.tableau-violet th {
-    background-color: #f2f2f2; /* Couleur de fond pour les en-têtes */
-}
-.tfoot{
-    height: 15vh;
-}
-tr .text-center{
-    text-align: center;
-    font-weight: 500;
-}
-.bg1,.bg2,.bg3,.bg4{
-    color: aliceblue
-}
-.bg1{
-    background-color: orange
-}
-.bg2{
-    background-color: rgb(235, 72, 72)
-}.bg3{
-    background-color: rgb(94, 94, 196)
-}.bg4{
-    background-color: dodgerblue
-}
-.header-background img{
-    background-size: cover; /* Ajuste l'image pour couvrir l'élément */
-    background-position: center; /* Centre l'image */
-    color: white; /* Change la couleur du texte si nécessaire */
-    height: 100px; /* Ajustez la hauteur selon vos besoins */
-}
-@media print {
-    #printButton {
-        display: none;
-    }
-    /* Conserver le style des autres éléments */
-
-        .header-background {
-        background-image: url('{{ asset('img/esmodRecu.JPG') }}'); /* Remplacez par le chemin de votre image */
-        background-size: cover; /* Ajuste l'image pour couvrir l'élément */
+        .body {
+        /* Assurez-vous que le body prend toute la hauteur de la fenêtre */
+        height: 100vh;
+        margin: 0;
+        background-image: url("{{ asset('img/logo.jpg') }}");
+        background-size: cover; /* Couvre toute la page */
         background-position: center; /* Centre l'image */
-        color: white; /* Change la couleur du texte si nécessaire */
-        height: 100px; /* Ajustez la hauteur selon vos besoins */
-    }
-    .tableau-violet {
-        border-collapse: collapse; /* Pour fusionner les bordures */
-        width: 100%; /* Ajustez selon vos besoins */
-    }
-
-    .tableau-violet th, .tableau-violet td {
-        border: 1px solid dodgerblue; /* Bordure de 2 pixels en violet */
-        padding: 8px; /* Espacement interne */
-        text-align: left; /* Alignement du texte */
+        background-repeat: no-repeat; /* Évite que l'image se répète */
+        /* Opacité de l'image d'arrière-plan avec un fond semi-transparent */
+        position: relative;
+        z-index: 99;
+        padding: 2vw
     }
 
-    .tableau-violet th {
-        background-color: #f2f2f2; /* Couleur de fond pour les en-têtes */
+    .body::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.5); /* Ajustez l'opacité ici */
+        z-index: -1; /* Assurez-vous que l'image est en arrière-plan */
     }
-    .tfoot{
-        height: 15vh;
-    }
-    tr .text-center{
-        text-align: center;
-        font-weight: 500;
-    }
-    .bg1,.bg2,.bg3,.bg4{
-        color: aliceblue
-    }
-    .bg1{
-        background-color: orange
-    }
-    .bg2{
-        background-color: rgb(235, 72, 72)
-    }.bg3{
-        background-color: rgb(94, 94, 196)
-    }.bg4{
-        background-color: dodgerblue
-    }
-}
+
     </style>
 </head>
 
@@ -172,12 +93,12 @@ tr .text-center{
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top st-red" role="navigation" style="color:white;opacity: 1">
             <!-- Sidebar toggle button-->
-            <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
+            {{-- <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
-            </a>
+            </a> --}}
             <div class="navbar-right">
                 <ul class="nav navbar-nav">
                     <!-- Messages: style can be found in dropdown.less-->
@@ -185,17 +106,21 @@ tr .text-center{
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="fa fa-user"></i>
-                            <span>{{ session('user')->nom }}<i class="caret"></i></span>
+                            <span>{{ session('etudiant')->nom_prenom }}&nbsp;<i class="caret"></i></span>
                         </a>
                         <ul class="dropdown-menu dropdown-custom dropdown-menu-right">
-                            <li class="dropdown-header text-center">Account</li>
+                            <li class="dropdown-header text-center">
+                                <a href="{{ route('dashboardEtudiant', session('etudiant')->id) }}">Mes Infos</a>
+                            </li>
                             <li class="divider"></li>
-                            <li>
-                                <a href="{{ route('utilisateur.show', session('user')->id) }}"><i class="fa fa-user pull-right"></i>Mon profil</a>
+                            <li class="text-center"><a href="">Nouvelle a ESMOD</a></li>
+                            <li class="text-center"><a href="">A propos de ESMOD</a></li>
+                           <li>
+
                             </li>
-                            <li>
+                             {{-- <li>
                                 <a href="{{ route('logoutPage') }}"><i class="fa fa-ban fa-fw pull-right"></i> Deconexion</a>
-                            </li>
+                            </li> --}}
                         </ul>
                     </li>
                 </ul>
@@ -204,69 +129,7 @@ tr .text-center{
     </header>
     <div class="wrapper row-offcanvas row-offcanvas-left">
         <!-- Left side column. contains the logo and sidebar -->
-        <aside class="left-side sidebar-offcanvas " style="background: #dc3545;">
-            <!-- sidebar: style can be found in sidebar.less -->
-            <section class="sidebar">
-                <!-- Sidebar user panel -->
-                <div class="user-panel">
-                    <div class="pull-left info">
-                        <p>Salut, {{ session('user')->nom }}</p>
-                        <a href="#"><i class="fa fa-circle text-success"></i> connecter</a>
-                    </div>
-                </div>
-                <!-- sidebar menu: : style can be found in sidebar.less -->
-                <ul class="sidebar-menu">
-                    {{-- @include("menu") --}}
-                    <li class="{{ request()->routeIs('dashboard') ? 'active' : '' }}">
-                        <a href="{{ route('dashboard') }}">
-                            <ion-icon name="logo-microsoft"></ion-icon> <span>Dashboard</span>
-                        </a>
-                    </li>
 
-                    @if(session('user')->role == "Administrateur")
-                        <li class="{{ request()->routeIs('utilisateur','utilisateurAdd','utilisateur.edit') ? 'active' : '' }}">
-                            <a href="{{ route('utilisateur') }}">
-                                <ion-icon name="people"></ion-icon> <span>Utilisateurs</span>
-                            </a>
-                        </li>
-                    @endif
-
-                    <li class="{{ request()->routeIs('etudiant') ? 'active' : '' }}">
-                        <a href="{{ route('etudiant') }}">
-                            <ion-icon name="school"></ion-icon> <span>Etudiants</span>
-                        </a>
-                    </li>
-
-                    <li class="{{ request()->routeIs('specialite','specialiteAdd','specialite.edit') ? 'active' : '' }}">
-                        <a href="{{ route('specialite') }}">
-                            <ion-icon name="sparkles"></ion-icon> <span>Specialités</span>
-                        </a>
-                    </li>
-
-                    @if(session('user')->role == "Administrateur")
-                        <li class="{{ request()->routeIs('campus','campusAdd','campus.edit') ? 'active' : '' }}">
-                            <a href="{{ route('campus') }}">
-                                <ion-icon name="school"></ion-icon> <span>Campus</span>
-                            </a>
-                        </li>
-                    @endif
-
-                    <li class="{{ request()->routeIs('versement') ? 'active' : '' }}">
-                        <a href="{{ route('versement') }}">
-                            <ion-icon name="pricetags"></ion-icon> <span>Versement</span>
-                        </a>
-                    </li>
-
-                    <li class="{{ request()->routeIs('liste') ? 'active' : '' }}">
-                        <a href="{{ route('liste') }}">
-                            <ion-icon name="list"></ion-icon> <span>Liste</span>
-                        </a>
-                    </li>
-                </ul>
-
-            </section>
-            <!-- /.sidebar -->
-        </aside>
 
         <aside class="right-side">
             @if (session('success'))

@@ -17,6 +17,7 @@ class SpecialiteController extends Controller
         // Valider les données du formulaire
         $validatedData = $request->validate([
             'libele' => 'required|string|max:255',
+            'abreviation' => 'required|string|max:255',
             'scolarite' => 'required|numeric|min:0',
             'inscription' => 'required|numeric|min:0',
         ]);
@@ -24,6 +25,7 @@ class SpecialiteController extends Controller
         // Créer un nouveau spécialité avec les données validées
         Specialite::create([
             'libele' => $validatedData['libele'],
+            'abreviation' => $validatedData['abreviation'],
             'frais_scolarite' => $validatedData['scolarite'],
             'frais_inscription' => $validatedData['inscription'],
         ]);
@@ -52,6 +54,7 @@ class SpecialiteController extends Controller
         // Valider les données du formulaire
         $validatedData = $request->validate([
             'libele' => 'required|string|max:255',
+            'abreviation' => 'required|string|max:255',
             'scolarite' => 'required|numeric|min:0',
             'inscription' => 'required|numeric|min:0',
         ]);
@@ -60,6 +63,7 @@ class SpecialiteController extends Controller
         $specialite = Specialite::findOrFail($id);
         $specialite->update([
             'libele' => $validatedData['libele'],
+            'abreviation' => $validatedData['abreviation'],
             'frais_scolarite' => $validatedData['scolarite'],
             'frais_inscription' => $validatedData['inscription'],
         ]);

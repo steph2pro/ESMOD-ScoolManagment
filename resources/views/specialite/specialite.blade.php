@@ -28,6 +28,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>libele</th>
+                                <th>Abreviation</th>
                                 <th>Frais de scolarite</th>
                                 <th>Frais d'inscription</th>
                                 <th>ACTIONS</th>
@@ -38,6 +39,7 @@
                             <tr class="element">
                                 <td class="data">{{ $index + 1 }}</td>
                                 <td class="data">{{ $specialite->libele }}</td>
+                                <td class="data">{{ $specialite->abreviation }}</td>
                                 <td class="data">{{ $specialite->frais_scolarite }}</td>
                                 <td class="data">{{ $specialite->frais_inscription }}</td>
                                 <td class="data">

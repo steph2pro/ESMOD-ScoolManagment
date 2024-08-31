@@ -88,11 +88,16 @@
 
                         <div class="form-group">
                             <label for="campus">Campus</label>
-                            <select name="campus_id" id="campus" class="form-control @error('campus_id') is-invalid @enderror" required>
-                                @foreach($campus as $camp)
-                                    <option value="{{ $camp->id }}" {{ old('campus_id') == $camp->id ? 'selected' : '' }}>{{ $camp->nom }}</option>
-                                @endforeach
-                            </select>
+                            @if (session('user')->role == "Administrateur")
+                                <select name="campus_id" id="campus" class="form-control @error('campus_id') is-invalid @enderror" required>
+                                    @foreach($campus as $camp)
+                                        <option value="{{ $camp->id }}" {{ old('campus_id') == $camp->id ? 'selected' : '' }}>{{ $camp->nom }}</option>
+                                    @endforeach
+                                </select>
+                            @else
+                                <input type="text" class="form-control" value="{{ session('campus')->nom }}" disabled>
+                                <input type="hidden" name="campus_id" value="{{ session('campus')->id }}">
+                            @endif
                             @error('campus_id')
                                 <div class="invalid-feedback">
                                     {{ $message }}

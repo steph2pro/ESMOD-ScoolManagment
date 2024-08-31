@@ -23,6 +23,10 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="abreviation">abreviation de la spécialité</label>
+                            <input type="text" class="form-control" name="abreviation" id="abreviation" placeholder="Entrer l'abreviation de la spécialité" required>
+                        </div>
+                        <div class="form-group">
                             <label for="scolarite">Frais de scolarité</label>
                             <input type="number" step="0.01" class="form-control" name="scolarite" id="scolarite" placeholder="Entrer les frais de scolarité" required>
                         </div>

@@ -12,13 +12,14 @@ class Specialite extends Model
 
     protected $fillable = [
         'libele',
+        'abreviation',
         'frais_scolarite',
         'frais_inscription',
     ];
 
 
 
-    public function etudiant()
+    public function etudiants()
     {
         return $this->hasMany(Etudiant::class);
     }

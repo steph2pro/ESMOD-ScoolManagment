@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
-
-        Schema::create('paiement_frais_scolarites', function (Blueprint $table) {
+        Schema::create('versements', function (Blueprint $table) {
             $table->id();
             $table->integer('montant');
+            $table->string('objet_paiement'); // Ajout de l'objet du paiement
+            $table->string('mode_paiement'); // Ajout du mode de paiement
+            $table->string('date_paiement'); // Ajout de la date de paiement
             $table->timestamps();
             $table->foreignId('etudiant_id')->constrained();
         });
@@ -26,7 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
-        Schema::dropIfExists('paiement_frais_scolarites');
+        Schema::dropIfExists('versements');
     }
 };

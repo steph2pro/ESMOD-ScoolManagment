@@ -21,31 +21,59 @@
 
                         <div class="form-group">
                             <label for="nom">Nom de l'utilisateur</label>
-                            <input type="text" class="form-control" name="nom" id="nom" value="{{ old('nom', $utilisateur->nom) }}" placeholder="Entrer le nom de l'utilisateur" required>
-                            @if ($errors->has('nom'))
-                                <span class="text-danger">{{ $errors->first('nom') }}</span>
-                            @endif
+                            <input type="text" class="form-control @error('nom') is-invalid @enderror" name="nom" id="nom" value="{{ old('nom', $utilisateur->nom) }}" placeholder="Entrer le nom de l'utilisateur" required>
+                            @error('nom')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="text" class="form-control" name="email" id="email" value="{{ old('email', $utilisateur->email) }}" placeholder="Entrer l'email de l'utilisateur" required>
-                            @if ($errors->has('email'))
-                                <span class="text-danger">{{ $errors->first('email') }}</span>
-                            @endif
+                            <input type="text" class="form-control @error('email') is-invalid @enderror" name="email" id="email" value="{{ old('email', $utilisateur->email) }}" placeholder="Entrer l'email de l'utilisateur" required>
+                            @error('email')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <div class="form-group">
-                            <label for="role">Rôle</label>
-                            <input type="text" class="form-control" name="role" id="role" value="{{ old('role', $utilisateur->role) }}" placeholder="Entrer le rôle de l'utilisateur" required>
-                            @if ($errors->has('role'))
-                                <span class="text-danger">{{ $errors->first('role') }}</span>
+                            <label for="role">
+                                @if(auth()->user()->role === 'Administrateur')
+                                    Choisir le Campus qu'il devra administrer
+                                @else
+                                    Rôle
+                                @endif
+                            </label>
+
+                            @if(auth()->user()->role === 'Administrateur')
+                                <select name="role" id="role" class="form-control @error('role') is-invalid @enderror" required>
+                                    <option value="Administrateur">Tous les Campus</option>
+                                    @foreach($campus as $camp)
+                                        <option value="Gerant, {{ $camp->nom }}" {{ old('role', $utilisateur->role) == 'Gerant, ' . $camp->nom ? 'selected' : '' }}>
+                                            {{ $camp->nom }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            @else
+                                <input
+                                    type="text"
+                                    class="form-control @error('role') is-invalid @enderror"
+                                    id="role"
+                                    value="{{ old('role', $utilisateur->role) }}"
+                                    readonly  name="role"
+                                >
                             @endif
+
+                            @error('role')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
+
 
                         <div class="form-group">
                             <label for="sexe">Sexe</label>
-                            <select name="sexe" id="sexe" class="form-control">
+                            <select name="sexe" id="sexe" class="form-control @error('sexe') is-invalid @enderror">
                                 <option value="{{ old('sexe', $utilisateur->sexe) }}">{{ old('sexe', $utilisateur->sexe) }}</option>
                                 @if($utilisateur->sexe == "feminin")
                                     <option value="masculin">Masculin</option>
@@ -53,17 +81,17 @@
                                     <option value="feminin">Feminin</option>
                                 @endif
                             </select>
-                            @if ($errors->has('sexe'))
-                                <span class="text-danger">{{ $errors->first('sexe') }}</span>
-                            @endif
+                            @error('sexe')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <div class="form-group">
                             <label for="password">Mot de passe</label>
-                            <input type="password" class="form-control" name="password" id="password" value="{{ old('password', $utilisateur->password) }}" placeholder="Entrer le nouveau mot de passe">
-                            @if ($errors->has('password'))
-                                <span class="text-danger">{{ $errors->first('password') }}</span>
-                            @endif
+                            <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" id="password"  placeholder="Entrer le nouveau mot de passe">
+                            @error('password')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <button type="submit" class="btn btn-info">Enregistrer</button>
